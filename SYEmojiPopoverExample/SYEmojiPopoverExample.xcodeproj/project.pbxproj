@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F8095BF81667E66C00CB3654 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095BF71667E66C00CB3654 /* UIKit.framework */; };
+		F8095BFA1667E66C00CB3654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095BF91667E66C00CB3654 /* Foundation.framework */; };
+		F8095BFC1667E66C00CB3654 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095BFB1667E66C00CB3654 /* CoreGraphics.framework */; };
+		F8095C021667E66C00CB3654 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F8095C001667E66C00CB3654 /* InfoPlist.strings */; };
+		F8095C041667E66C00CB3654 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C031667E66C00CB3654 /* main.m */; };
+		F8095C081667E66C00CB3654 /* SYAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C071667E66C00CB3654 /* SYAppDelegate.m */; };
+		F8095C0A1667E66C00CB3654 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C091667E66C00CB3654 /* Default.png */; };
+		F8095C0C1667E66C00CB3654 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C0B1667E66C00CB3654 /* Default@2x.png */; };
+		F8095C0E1667E66C00CB3654 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C0D1667E66C00CB3654 /* Default-568h@2x.png */; };
+		F8095C111667E66C00CB3654 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8095C0F1667E66C00CB3654 /* MainStoryboard.storyboard */; };
+		F8095C171667E66C00CB3654 /* SYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C161667E66C00CB3654 /* SYViewController.m */; };
+		F8095C201667E70600CB3654 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C1F1667E70600CB3654 /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8095C331667E71A00CB3654 /* no_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C241667E71A00CB3654 /* no_picture.png */; };
+		F8095C341667E71A00CB3654 /* no_picture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C251667E71A00CB3654 /* no_picture@2x.png */; };
+		F8095C351667E71A00CB3654 /* no_picture_org.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F8095C261667E71A00CB3654 /* no_picture_org.pdf */; };
+		F8095C361667E71A00CB3654 /* no_picture_org.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C271667E71A00CB3654 /* no_picture_org.png */; };
+		F8095C371667E71A00CB3654 /* SYGalleryActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C291667E71A00CB3654 /* SYGalleryActionView.m */; };
+		F8095C381667E71A00CB3654 /* SYGalleryFullPage.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C2C1667E71A00CB3654 /* SYGalleryFullPage.m */; };
+		F8095C391667E71A00CB3654 /* SYGalleryFullView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C2E1667E71A00CB3654 /* SYGalleryFullView.m */; };
+		F8095C3A1667E71A00CB3654 /* SYGalleryThumbCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C301667E71A00CB3654 /* SYGalleryThumbCell.m */; };
+		F8095C3B1667E71A00CB3654 /* SYGalleryThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C321667E71A00CB3654 /* SYGalleryThumbView.m */; };
+		F8095C401667E74B00CB3654 /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C3F1667E74B00CB3654 /* DACircularProgressView.m */; };
+		F8095C541667E75700CB3654 /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C441667E75700CB3654 /* GMGridView.m */; };
+		F8095C551667E75700CB3654 /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C4A1667E75700CB3654 /* GMGridViewCell.m */; };
+		F8095C561667E75700CB3654 /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C4C1667E75700CB3654 /* GMGridViewLayoutStrategies.m */; };
+		F8095C571667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C4E1667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.m */; };
+		F8095C581667E75700CB3654 /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C501667E75700CB3654 /* UIView+GMGridViewAdditions.m */; };
+		F8095C5F1667E76E00CB3654 /* MKNumberBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C5E1667E76E00CB3654 /* MKNumberBadgeView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C621667E7B600CB3654 /* SYEmojiPopover.m */; };
+		F8095C651667EFB600CB3654 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095C641667EFB600CB3654 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F8095BF31667E66C00CB3654 /* SYEmojiPopoverExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SYEmojiPopoverExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8095BF71667E66C00CB3654 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F8095BF91667E66C00CB3654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F8095BFB1667E66C00CB3654 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F8095BFF1667E66C00CB3654 /* SYEmojiPopoverExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SYEmojiPopoverExample-Info.plist"; sourceTree = "<group>"; };
+		F8095C011667E66C00CB3654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F8095C031667E66C00CB3654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F8095C051667E66C00CB3654 /* SYEmojiPopoverExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SYEmojiPopoverExample-Prefix.pch"; sourceTree = "<group>"; };
+		F8095C061667E66C00CB3654 /* SYAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYAppDelegate.h; sourceTree = "<group>"; };
+		F8095C071667E66C00CB3654 /* SYAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYAppDelegate.m; sourceTree = "<group>"; };
+		F8095C091667E66C00CB3654 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		F8095C0B1667E66C00CB3654 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		F8095C0D1667E66C00CB3654 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F8095C101667E66C00CB3654 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		F8095C151667E66C00CB3654 /* SYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYViewController.h; sourceTree = "<group>"; };
+		F8095C161667E66C00CB3654 /* SYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYViewController.m; sourceTree = "<group>"; };
+		F8095C1E1667E70600CB3654 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
+		F8095C1F1667E70600CB3654 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
+		F8095C241667E71A00CB3654 /* no_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_picture.png; sourceTree = "<group>"; };
+		F8095C251667E71A00CB3654 /* no_picture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_picture@2x.png"; sourceTree = "<group>"; };
+		F8095C261667E71A00CB3654 /* no_picture_org.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = no_picture_org.pdf; sourceTree = "<group>"; };
+		F8095C271667E71A00CB3654 /* no_picture_org.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_picture_org.png; sourceTree = "<group>"; };
+		F8095C281667E71A00CB3654 /* SYGalleryActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryActionView.h; sourceTree = "<group>"; };
+		F8095C291667E71A00CB3654 /* SYGalleryActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYGalleryActionView.m; sourceTree = "<group>"; };
+		F8095C2A1667E71A00CB3654 /* SYGalleryDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryDelegates.h; sourceTree = "<group>"; };
+		F8095C2B1667E71A00CB3654 /* SYGalleryFullPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryFullPage.h; sourceTree = "<group>"; };
+		F8095C2C1667E71A00CB3654 /* SYGalleryFullPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYGalleryFullPage.m; sourceTree = "<group>"; };
+		F8095C2D1667E71A00CB3654 /* SYGalleryFullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryFullView.h; sourceTree = "<group>"; };
+		F8095C2E1667E71A00CB3654 /* SYGalleryFullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYGalleryFullView.m; sourceTree = "<group>"; };
+		F8095C2F1667E71A00CB3654 /* SYGalleryThumbCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryThumbCell.h; sourceTree = "<group>"; };
+		F8095C301667E71A00CB3654 /* SYGalleryThumbCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYGalleryThumbCell.m; sourceTree = "<group>"; };
+		F8095C311667E71A00CB3654 /* SYGalleryThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYGalleryThumbView.h; sourceTree = "<group>"; };
+		F8095C321667E71A00CB3654 /* SYGalleryThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYGalleryThumbView.m; sourceTree = "<group>"; };
+		F8095C3E1667E74B00CB3654 /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		F8095C3F1667E74B00CB3654 /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		F8095C421667E75700CB3654 /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
+		F8095C431667E75700CB3654 /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
+		F8095C441667E75700CB3654 /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
+		F8095C481667E75700CB3654 /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
+		F8095C491667E75700CB3654 /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
+		F8095C4A1667E75700CB3654 /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
+		F8095C4B1667E75700CB3654 /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
+		F8095C4C1667E75700CB3654 /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
+		F8095C4D1667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		F8095C4E1667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		F8095C4F1667E75700CB3654 /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
+		F8095C501667E75700CB3654 /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		F8095C5D1667E76E00CB3654 /* MKNumberBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNumberBadgeView.h; sourceTree = "<group>"; };
+		F8095C5E1667E76E00CB3654 /* MKNumberBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNumberBadgeView.m; sourceTree = "<group>"; };
+		F8095C611667E7B600CB3654 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
+		F8095C621667E7B600CB3654 /* SYEmojiPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiPopover.m; sourceTree = "<group>"; };
+		F8095C641667EFB600CB3654 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F8095BF01667E66C00CB3654 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8095C651667EFB600CB3654 /* QuartzCore.framework in Frameworks */,
+				F8095BFC1667E66C00CB3654 /* CoreGraphics.framework in Frameworks */,
+				F8095BF81667E66C00CB3654 /* UIKit.framework in Frameworks */,
+				F8095BFA1667E66C00CB3654 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F8095BE81667E66C00CB3654 = {
+			isa = PBXGroup;
+			children = (
+				F8095BFD1667E66C00CB3654 /* SYEmojiPopoverExample */,
+				F8095C601667E78500CB3654 /* SYEmojiPopover */,
+				F8095BF61667E66C00CB3654 /* Frameworks */,
+				F8095BF41667E66C00CB3654 /* Products */,
+				F8095C211667E70B00CB3654 /* Libs */,
+			);
+			sourceTree = "<group>";
+		};
+		F8095BF41667E66C00CB3654 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F8095BF31667E66C00CB3654 /* SYEmojiPopoverExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F8095BF61667E66C00CB3654 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C641667EFB600CB3654 /* QuartzCore.framework */,
+				F8095BF71667E66C00CB3654 /* UIKit.framework */,
+				F8095BF91667E66C00CB3654 /* Foundation.framework */,
+				F8095BFB1667E66C00CB3654 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8095BFD1667E66C00CB3654 /* SYEmojiPopoverExample */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C061667E66C00CB3654 /* SYAppDelegate.h */,
+				F8095C071667E66C00CB3654 /* SYAppDelegate.m */,
+				F8095C0F1667E66C00CB3654 /* MainStoryboard.storyboard */,
+				F8095C151667E66C00CB3654 /* SYViewController.h */,
+				F8095C161667E66C00CB3654 /* SYViewController.m */,
+				F8095BFE1667E66C00CB3654 /* Supporting Files */,
+			);
+			path = SYEmojiPopoverExample;
+			sourceTree = "<group>";
+		};
+		F8095BFE1667E66C00CB3654 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F8095BFF1667E66C00CB3654 /* SYEmojiPopoverExample-Info.plist */,
+				F8095C001667E66C00CB3654 /* InfoPlist.strings */,
+				F8095C031667E66C00CB3654 /* main.m */,
+				F8095C051667E66C00CB3654 /* SYEmojiPopoverExample-Prefix.pch */,
+				F8095C091667E66C00CB3654 /* Default.png */,
+				F8095C0B1667E66C00CB3654 /* Default@2x.png */,
+				F8095C0D1667E66C00CB3654 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F8095C1D1667E70600CB3654 /* PopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C1E1667E70600CB3654 /* PopoverView.h */,
+				F8095C1F1667E70600CB3654 /* PopoverView.m */,
+			);
+			name = PopoverView;
+			path = ../Libs/PopoverView/PopoverView;
+			sourceTree = "<group>";
+		};
+		F8095C211667E70B00CB3654 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C221667E71A00CB3654 /* SYGallery */,
+				F8095C1D1667E70600CB3654 /* PopoverView */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		F8095C221667E71A00CB3654 /* SYGallery */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C3C1667E72200CB3654 /* Libs */,
+				F8095C231667E71A00CB3654 /* Resources */,
+				F8095C281667E71A00CB3654 /* SYGalleryActionView.h */,
+				F8095C291667E71A00CB3654 /* SYGalleryActionView.m */,
+				F8095C2A1667E71A00CB3654 /* SYGalleryDelegates.h */,
+				F8095C2B1667E71A00CB3654 /* SYGalleryFullPage.h */,
+				F8095C2C1667E71A00CB3654 /* SYGalleryFullPage.m */,
+				F8095C2D1667E71A00CB3654 /* SYGalleryFullView.h */,
+				F8095C2E1667E71A00CB3654 /* SYGalleryFullView.m */,
+				F8095C2F1667E71A00CB3654 /* SYGalleryThumbCell.h */,
+				F8095C301667E71A00CB3654 /* SYGalleryThumbCell.m */,
+				F8095C311667E71A00CB3654 /* SYGalleryThumbView.h */,
+				F8095C321667E71A00CB3654 /* SYGalleryThumbView.m */,
+			);
+			name = SYGallery;
+			path = ../Libs/SYGallery/SYGallery;
+			sourceTree = "<group>";
+		};
+		F8095C231667E71A00CB3654 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C241667E71A00CB3654 /* no_picture.png */,
+				F8095C251667E71A00CB3654 /* no_picture@2x.png */,
+				F8095C261667E71A00CB3654 /* no_picture_org.pdf */,
+				F8095C271667E71A00CB3654 /* no_picture_org.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F8095C3C1667E72200CB3654 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C5C1667E76E00CB3654 /* MKNumberBadgeView */,
+				F8095C411667E75700CB3654 /* GMGridView */,
+				F8095C3D1667E74B00CB3654 /* DACircularProgress */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		F8095C3D1667E74B00CB3654 /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C3E1667E74B00CB3654 /* DACircularProgressView.h */,
+				F8095C3F1667E74B00CB3654 /* DACircularProgressView.m */,
+			);
+			name = DACircularProgress;
+			path = ../Lib/DACircularProgres/DACircularProgress;
+			sourceTree = "<group>";
+		};
+		F8095C411667E75700CB3654 /* GMGridView */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C421667E75700CB3654 /* GMGridView-Constants.h */,
+				F8095C431667E75700CB3654 /* GMGridView.h */,
+				F8095C441667E75700CB3654 /* GMGridView.m */,
+				F8095C481667E75700CB3654 /* GMGridViewCell+Extended.h */,
+				F8095C491667E75700CB3654 /* GMGridViewCell.h */,
+				F8095C4A1667E75700CB3654 /* GMGridViewCell.m */,
+				F8095C4B1667E75700CB3654 /* GMGridViewLayoutStrategies.h */,
+				F8095C4C1667E75700CB3654 /* GMGridViewLayoutStrategies.m */,
+				F8095C4D1667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.h */,
+				F8095C4E1667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.m */,
+				F8095C4F1667E75700CB3654 /* UIView+GMGridViewAdditions.h */,
+				F8095C501667E75700CB3654 /* UIView+GMGridViewAdditions.m */,
+			);
+			name = GMGridView;
+			path = ../Lib/GMGridView/GMGridView;
+			sourceTree = "<group>";
+		};
+		F8095C5C1667E76E00CB3654 /* MKNumberBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C5D1667E76E00CB3654 /* MKNumberBadgeView.h */,
+				F8095C5E1667E76E00CB3654 /* MKNumberBadgeView.m */,
+			);
+			name = MKNumberBadgeView;
+			path = ../Lib/iPhoneMK/Views/MKNumberBadgeView;
+			sourceTree = "<group>";
+		};
+		F8095C601667E78500CB3654 /* SYEmojiPopover */ = {
+			isa = PBXGroup;
+			children = (
+				F8095C611667E7B600CB3654 /* SYEmojiPopover.h */,
+				F8095C621667E7B600CB3654 /* SYEmojiPopover.m */,
+			);
+			name = SYEmojiPopover;
+			path = ../SYEmojiPopover;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F8095BF21667E66C00CB3654 /* SYEmojiPopoverExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F8095C1A1667E66C00CB3654 /* Build configuration list for PBXNativeTarget "SYEmojiPopoverExample" */;
+			buildPhases = (
+				F8095BEF1667E66C00CB3654 /* Sources */,
+				F8095BF01667E66C00CB3654 /* Frameworks */,
+				F8095BF11667E66C00CB3654 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SYEmojiPopoverExample;
+			productName = SYEmojiPopoverExample;
+			productReference = F8095BF31667E66C00CB3654 /* SYEmojiPopoverExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F8095BEA1667E66C00CB3654 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SY;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Syan;
+			};
+			buildConfigurationList = F8095BED1667E66C00CB3654 /* Build configuration list for PBXProject "SYEmojiPopoverExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F8095BE81667E66C00CB3654;
+			productRefGroup = F8095BF41667E66C00CB3654 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F8095BF21667E66C00CB3654 /* SYEmojiPopoverExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F8095BF11667E66C00CB3654 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8095C021667E66C00CB3654 /* InfoPlist.strings in Resources */,
+				F8095C0A1667E66C00CB3654 /* Default.png in Resources */,
+				F8095C0C1667E66C00CB3654 /* Default@2x.png in Resources */,
+				F8095C0E1667E66C00CB3654 /* Default-568h@2x.png in Resources */,
+				F8095C111667E66C00CB3654 /* MainStoryboard.storyboard in Resources */,
+				F8095C331667E71A00CB3654 /* no_picture.png in Resources */,
+				F8095C341667E71A00CB3654 /* no_picture@2x.png in Resources */,
+				F8095C351667E71A00CB3654 /* no_picture_org.pdf in Resources */,
+				F8095C361667E71A00CB3654 /* no_picture_org.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F8095BEF1667E66C00CB3654 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F8095C041667E66C00CB3654 /* main.m in Sources */,
+				F8095C081667E66C00CB3654 /* SYAppDelegate.m in Sources */,
+				F8095C171667E66C00CB3654 /* SYViewController.m in Sources */,
+				F8095C201667E70600CB3654 /* PopoverView.m in Sources */,
+				F8095C371667E71A00CB3654 /* SYGalleryActionView.m in Sources */,
+				F8095C381667E71A00CB3654 /* SYGalleryFullPage.m in Sources */,
+				F8095C391667E71A00CB3654 /* SYGalleryFullView.m in Sources */,
+				F8095C3A1667E71A00CB3654 /* SYGalleryThumbCell.m in Sources */,
+				F8095C3B1667E71A00CB3654 /* SYGalleryThumbView.m in Sources */,
+				F8095C401667E74B00CB3654 /* DACircularProgressView.m in Sources */,
+				F8095C541667E75700CB3654 /* GMGridView.m in Sources */,
+				F8095C551667E75700CB3654 /* GMGridViewCell.m in Sources */,
+				F8095C561667E75700CB3654 /* GMGridViewLayoutStrategies.m in Sources */,
+				F8095C571667E75700CB3654 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
+				F8095C581667E75700CB3654 /* UIView+GMGridViewAdditions.m in Sources */,
+				F8095C5F1667E76E00CB3654 /* MKNumberBadgeView.m in Sources */,
+				F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F8095C001667E66C00CB3654 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8095C011667E66C00CB3654 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F8095C0F1667E66C00CB3654 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F8095C101667E66C00CB3654 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F8095C181667E66C00CB3654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F8095C191667E66C00CB3654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F8095C1B1667E66C00CB3654 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SYEmojiPopoverExample/SYEmojiPopoverExample-Prefix.pch";
+				INFOPLIST_FILE = "SYEmojiPopoverExample/SYEmojiPopoverExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F8095C1C1667E66C00CB3654 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SYEmojiPopoverExample/SYEmojiPopoverExample-Prefix.pch";
+				INFOPLIST_FILE = "SYEmojiPopoverExample/SYEmojiPopoverExample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F8095BED1667E66C00CB3654 /* Build configuration list for PBXProject "SYEmojiPopoverExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8095C181667E66C00CB3654 /* Debug */,
+				F8095C191667E66C00CB3654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F8095C1A1667E66C00CB3654 /* Build configuration list for PBXNativeTarget "SYEmojiPopoverExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F8095C1B1667E66C00CB3654 /* Debug */,
+				F8095C1C1667E66C00CB3654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F8095BEA1667E66C00CB3654 /* Project object */;
+}

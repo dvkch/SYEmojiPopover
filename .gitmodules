@@ -1,0 +1,6 @@
+[submodule "Libs/PopoverView"]
+	path = Libs/PopoverView
+	url = git://github.com/runway20/PopoverView.git
+[submodule "Libs/SYGallery"]
+	path = Libs/SYGallery
+	url = git://github.com/dvkch/SYGallery.git
