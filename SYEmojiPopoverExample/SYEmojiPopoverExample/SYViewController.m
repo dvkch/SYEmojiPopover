@@ -9,33 +9,61 @@
 #import "SYViewController.h"
 #import "SYEmojiPopover.h"
 
-@interface SYViewController ()
-
-@end
-
 @implementation SYViewController
 
-- (void)viewDidLoad
+#pragma mark - Rotation support
+-(BOOL)shouldAutorotate
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    return YES;
 }
 
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+#pragma mark - View Lifecycle
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)selectEmojiClick:(id)sender {
-    SYEmojiPopover *pop = [[SYEmojiPopover alloc]
-                           initWithFrame:CGRectMake(0.f, 0.f, 0.f, 0.f)];
-    
-    UIView *senderView = (UIView*)sender;
-    CGPoint point = senderView.center;
-    point.y = senderView.frame.origin.y + senderView.frame.size.height;
-    
-    [pop showFromPoint:point inView:self.view];
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    if(self->_emojiPopover)
+    {
+        [self->_emojiPopover moveToPoint:self.buttonEmoji.center
+                                  inView:self.view
+                            withDuration:duration];
+    }
 }
 
+#pragma mark - IBActions
+- (IBAction)selectEmojiClick:(id)sender {
+    
+    self->_emojiPopover = [[SYEmojiPopover alloc] init];
+    
+    [self->_emojiPopover setDelegate:self];
+    [self->_emojiPopover showFromPoint:self.buttonEmoji.center inView:self.view];
+}
+
+#pragma mark - SYEmojiPopoverDelegate methods
+-(void)emojiPopover:(SYEmojiPopover *)emojiPopover didClickedOnCharacter:(NSString *)character
+{
+    [self.labelEmoji setFont:[UIFont fontWithName:@"AppleColorEmoji" size:100.f]];
+    [self.labelEmoji setText:character];
+}
+
+
+- (void)viewDidUnload {
+    [self setButtonEmoji:nil];
+    [super viewDidUnload];
+}
 @end

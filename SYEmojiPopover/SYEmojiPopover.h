@@ -7,21 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SYGalleryDelegates.h"
+#import "GMGridView.h"
 
 @class PopoverView;
-@class SYGalleryThumbView;
+@class SYEmojiPopover;
+
+@protocol SYEmojiPopoverDelegate <NSObject>
+@required
+-(void)emojiPopover:(SYEmojiPopover*)emojiPopover didClickedOnCharacter:(NSString*)character;
+@end
 
 @interface SYEmojiPopover : UIView
-<SYGalleryDataSource,
-SYGalleryThumbViewActions>
+<GMGridViewActionDelegate,
+GMGridViewDataSource>
 {
 @private
-    SYGalleryThumbView *_thumbView;
+    GMGridView *_gridView;
     NSArray *_characters;
     PopoverView *_popover;
 }
 
+@property (weak, atomic) id<SYEmojiPopoverDelegate> delegate;
+
 -(void)showFromPoint:(CGPoint)point inView:(UIView*)view;
+-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withSize:(CGSize)size;
+
+-(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration;
 
 @end

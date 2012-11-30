@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SYEmojiPopover.h"
 
-@interface SYViewController : UIViewController
+@interface SYViewController : UIViewController <SYEmojiPopoverDelegate> {
+@private
+    SYEmojiPopover *_emojiPopover;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *labelEmoji;
+@property (weak, nonatomic) IBOutlet UIButton *buttonEmoji;
 
 @end

@@ -7,14 +7,25 @@
 //
 
 #import "SYEmojiPopover.h"
-#import "SYGalleryThumbView.h"
+#import "GMGridView.h"
 #import "PopoverView.h"
+
+#define EMOJI_RUNNING_IPHONE        ( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
+#define EMOJI_ITEM_SIZE             ( EMOJI_RUNNING_IPHONE ? 33.f : 45.f )
+#define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 29.f : 39.f )
+#define EMOJI_NB_ITEM_IN_ROW        ( EMOJI_RUNNING_IPHONE ? 8 : 8 )
+#define EMOJI_NB_ITEM_IN_COL        ( EMOJI_RUNNING_IPHONE ? 5 : 5 )
+#define EMOJI_GRID_MARGIN           ( EMOJI_RUNNING_IPHONE ? 1.f : 2.f )
+#define EMOJI_GRID_DEFAULT_WIDTH    ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_ROW + EMOJI_GRID_MARGIN * 2.f )
+#define EMOJI_GRID_DEFAULT_HEIGHT   ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_COL + EMOJI_GRID_MARGIN * 2.f )
 
 @interface SYEmojiPopover (Private)
 -(void)loadView;
 @end
 
 @implementation SYEmojiPopover
+
+@synthesize delegate = _delegate;
 
 #pragma mark - Initialization
 - (id)init
@@ -50,94 +61,112 @@
 }
 
 #pragma mark - View methods
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view {
-    SYGalleryThumbView *emojiView = [[SYGalleryThumbView alloc] initWithFrame:CGRectMake(0, 0, 250, 100)];
+
+-(void)showFromPoint:(CGPoint)point inView:(UIView *)view {
     
-    [emojiView setCellBorderWidth:0.f andColor:[UIColor clearColor]];
-    [emojiView setDataSource:self];
-    [emojiView setActionDelegate:self];
-    [emojiView setCacheImages:NO];
-    [emojiView reloadGallery];
+    [self showFromPoint:point
+                 inView:view
+               withSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT)];
+}
+
+-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withSize:(CGSize)size {
     
+    if(!self->_gridView)
+        self->_gridView = [[GMGridView alloc] initWithFrame:CGRectMake(0.f, 0.f, size.width, size.height)];
+    
+    self->_gridView.autoresizingMask = UIViewAutoresizingNone;
+    self->_gridView.backgroundColor = [UIColor clearColor];
+    
+    self->_gridView.style = GMGridViewStyleSwap;
+    self->_gridView.itemSpacing = 0.f;
+    self->_gridView.minEdgeInsets = UIEdgeInsetsMake(EMOJI_GRID_MARGIN, EMOJI_GRID_MARGIN,
+                                                     EMOJI_GRID_MARGIN, EMOJI_GRID_MARGIN);
+    self->_gridView.centerGrid = NO;
+    self->_gridView.showsVerticalScrollIndicator = YES;
+    self->_gridView.showsHorizontalScrollIndicator = NO;
+    self->_gridView.alwaysBounceVertical = YES;
+    self->_gridView.clipsToBounds = YES;
+    
+    // so that cells cannot be moved
+    self->_gridView.enableEditOnLongPress = NO;
+    self->_gridView.sortingDelegate = nil;
+    
+    self->_gridView.actionDelegate = self;
+    self->_gridView.dataSource = self;
+    
+    [self->_gridView reloadData];
+    
+    [self->_popover setAutoresizingMask:view.autoresizingMask];
     self->_popover = [PopoverView showPopoverAtPoint:point
                                               inView:view
                                            withTitle:@"Emoji selection"
-                                     withContentView:emojiView
+                                     withContentView:self->_gridView
                                             delegate:nil];
 }
 
+-(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration {
+
+    if(!self->_popover)
+        return;
+    
+    [self->_popover animateRotationToNewPoint:point
+                                       inView:view
+                                 withDuration:duration];
+}
+
 #pragma mark - SYGalleryDataSource methods
-- (NSUInteger)numberOfItemsInGallery:(id<SYGalleryView>)gallery
+- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
     return [self->_characters count];
 }
 
-- (SYGallerySourceType)gallery:(id<SYGalleryView>)gallery
-             sourceTypeAtIndex:(NSUInteger)index
+- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return SYGallerySourceTypeText;
+    return CGSizeMake(EMOJI_ITEM_SIZE, EMOJI_ITEM_SIZE);
 }
 
-- (NSString*)gallery:(id<SYGalleryView>)gallery
- absolutePathAtIndex:(NSUInteger)index
-             andSize:(SYGalleryPhotoSize)size
+- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
 {
-    return @"";
+    NSString *text = (index < 0 || index >= [self->_characters count]) ? @"" : [self->_characters objectAtIndex:index];
+    
+    NSString *cellIdentifier = @"cellEmoji";
+    GMGridViewCell *cell = [gridView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if(!cell)
+        cell = [[GMGridViewCell alloc] init];
+    
+    [cell setReuseIdentifier:cellIdentifier];
+    
+    UITextField *textView = (UITextField*)cell.contentView;
+    if(!textView)
+        textView = [[UITextField alloc] initWithFrame:cell.bounds];
+    
+    [textView setText:text];
+    [textView setFont:[UIFont fontWithName:@"AppleColorEmoji" size:EMOJI_FONT_SIZE]];
+    [textView setBackgroundColor:[UIColor clearColor]];
+    [textView setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+    [textView setTextAlignment:NSTextAlignmentCenter];
+    [textView setUserInteractionEnabled:NO];
+    
+    [cell setBackgroundColor:[UIColor clearColor]];
+    [cell setContentView:textView];
+    
+    return cell;
 }
 
-- (NSString*)gallery:(id<SYGalleryView>)gallery
-          urlAtIndex:(NSUInteger)index
-             andSize:(SYGalleryPhotoSize)size
-{
-    return nil;
-}
-
-- (NSString*)gallery:(id<SYGalleryView>)gallery
-         textAtIndex:(NSUInteger)index
-             andSize:(SYGalleryPhotoSize)size
-{
-    if(index >= [self->_characters count])
-        return @"";
-    else
-        return [self->_characters objectAtIndex:index];
-}
-
-- (BOOL)gallery:(id<SYGalleryView>)gallery canDeleteAtIndex:(NSUInteger)index
+- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
 {
     return NO;
 }
 
-- (CGFloat)galleryThumbCellSize:(id<SYGalleryView>)gallery
+#pragma mark - GMGridViewActionDelegate methods
+- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
 {
-    return 29.f;
-}
-
-- (CGFloat)galleryThumbCellSpacing:(id<SYGalleryView>)gallery
-{
-    return 2.f;
-}
-
-- (BOOL)gallery:(id<SYGalleryView>)gallery shouldDisplayBadgeAtIndex:(NSUInteger)index
-{
-    return NO;
-}
-
-- (UIFont*)gallery:(id<SYGalleryView>)gallery
-   textFontAtIndex:(NSUInteger)index andSize:(SYGalleryPhotoSize)size
-{
-    return [UIFont systemFontOfSize:20.f];
-}
-
--(UIColor *)gallery:(id<SYGalleryView>)gallery textColorAtIndex:(NSUInteger)index andSize:(SYGalleryPhotoSize)size
-{
-    return [UIColor blackColor];
-}
-
-#pragma mark - SYGalleryThumbViewActions methods
-
-- (void)gallery:(id<SYGalleryView>)gallery didTapOnItemAtIndex:(NSUInteger)index
-{
-    NSLog(@"choosed character: %@", [self->_characters objectAtIndex:index]);
+    if(position < 0 || position >= [self->_characters count])
+        return;
+    
+    if([self.delegate respondsToSelector:@selector(emojiPopover:didClickedOnCharacter:)])
+        [self.delegate emojiPopover:self didClickedOnCharacter:[self->_characters objectAtIndex:position]];
+    
     [self->_popover dismiss];
 }
 
