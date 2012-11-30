@@ -28,9 +28,14 @@
 }
 
 - (IBAction)selectEmojiClick:(id)sender {
-    SYEmojiPopover *pop = [[SYEmojiPopover alloc] initWithFrame:CGRectMake(0.f, 0.f, 0.f, 0.f)];
+    SYEmojiPopover *pop = [[SYEmojiPopover alloc]
+                           initWithFrame:CGRectMake(0.f, 0.f, 0.f, 0.f)];
     
-    [pop showFromPoint:[(UIView*)sender center] inView:self.view];
+    UIView *senderView = (UIView*)sender;
+    CGPoint point = senderView.center;
+    point.y = senderView.frame.origin.y + senderView.frame.size.height;
+    
+    [pop showFromPoint:point inView:self.view];
 }
 
 @end

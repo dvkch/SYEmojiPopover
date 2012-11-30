@@ -30,17 +30,33 @@
 #pragma mark - Private methods
 -(void)loadView {
     if (!self->_characters) {
-        self->_characters = @[@"zouu"];
+        self->_characters = @[
+        @"😄", @"😃", @"😀", @"😊",
+        @"☺", @"😉", @"😍", @"😘",
+        @"😚", @"😗", @"😙", @"😜",
+        @"😝", @"😛", @"😳", @"😁",
+        @"😔", @"😌", @"😒", @"😞",
+        @"😣", @"😢", @"😂", @"😭",
+        @"😪", @"😥", @"😰", @"😅",
+        @"😓", @"😩", @"😫", @"😨",
+        @"😱", @"😠", @"😡", @"😤",
+        @"😖", @"😆", @"😋", @"😷",
+        @"😎", @"😴", @"😵", @"😲",
+        @"😟", @"😦", @"😧", @"😈",
+        @"👿", @"😮", @"😬", @"😐", 
+        @"😕", @"😯", @"😶", @"😇", 
+        @"😏", @"😑"];
     }
 }
 
 #pragma mark - View methods
 -(void)showFromPoint:(CGPoint)point inView:(UIView*)view {
-    SYGalleryThumbView *emojiView = [[SYGalleryThumbView alloc] initWithFrame:CGRectMake(0, 0, 150, 100)];
+    SYGalleryThumbView *emojiView = [[SYGalleryThumbView alloc] initWithFrame:CGRectMake(0, 0, 250, 100)];
     
+    [emojiView setCellBorderWidth:0.f andColor:[UIColor clearColor]];
     [emojiView setDataSource:self];
     [emojiView setActionDelegate:self];
-    [emojiView setCacheImages:YES];
+    [emojiView setCacheImages:NO];
     [emojiView reloadGallery];
     
     self->_popover = [PopoverView showPopoverAtPoint:point
@@ -93,7 +109,7 @@
 
 - (CGFloat)galleryThumbCellSize:(id<SYGalleryView>)gallery
 {
-    return 30.f;
+    return 29.f;
 }
 
 - (CGFloat)galleryThumbCellSpacing:(id<SYGalleryView>)gallery
@@ -122,6 +138,7 @@
 - (void)gallery:(id<SYGalleryView>)gallery didTapOnItemAtIndex:(NSUInteger)index
 {
     NSLog(@"choosed character: %@", [self->_characters objectAtIndex:index]);
+    [self->_popover dismiss];
 }
 
 @end
