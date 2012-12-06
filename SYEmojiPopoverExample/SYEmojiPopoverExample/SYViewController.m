@@ -8,6 +8,7 @@
 
 #import "SYViewController.h"
 #import "SYEmojiPopover.h"
+#import "SYEmojiCharacters.h"
 
 @implementation SYViewController
 
@@ -55,6 +56,7 @@
 }
 
 #pragma mark - SYEmojiPopoverDelegate methods
+
 -(void)emojiPopover:(SYEmojiPopover *)emojiPopover didClickedOnCharacter:(NSString *)character
 {
     [self.labelEmoji setFont:[UIFont fontWithName:@"AppleColorEmoji" size:100.f]];

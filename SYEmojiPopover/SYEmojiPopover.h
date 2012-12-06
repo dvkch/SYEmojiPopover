@@ -19,11 +19,14 @@
 
 @interface SYEmojiPopover : UIView
 <GMGridViewActionDelegate,
-GMGridViewDataSource>
+GMGridViewDataSource,
+UIScrollViewDelegate>
 {
 @private
-    GMGridView *_gridView;
-    NSArray *_characters;
+    UIView *_mainView;
+    UIPageControl *_pageControl;
+    UIScrollView *_scrollView;
+    NSMutableArray *_gridViews;
     PopoverView *_popover;
 }
 

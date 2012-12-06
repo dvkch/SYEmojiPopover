@@ -26,6 +26,7 @@
 		F80D18B01669320A00F0431E /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D18A9166931E700F0431E /* GMGridViewLayoutStrategies.m */; };
 		F80D18B11669320A00F0431E /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D18AB166931E700F0431E /* UIGestureRecognizer+GMGridViewAdditions.m */; };
 		F80D18B21669320A00F0431E /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F80D18AD166931E700F0431E /* UIView+GMGridViewAdditions.m */; };
+		F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,9 @@
 		F80D18AB166931E700F0431E /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIGestureRecognizer+GMGridViewAdditions.m"; path = "../Libs/GMGridView/GMGridView/UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		F80D18AC166931E700F0431E /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIView+GMGridViewAdditions.h"; path = "../Libs/GMGridView/GMGridView/UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
 		F80D18AD166931E700F0431E /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIView+GMGridViewAdditions.m"; path = "../Libs/GMGridView/GMGridView/UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
+		F8D9AC35166FFE1C009AABCD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		F8D9AC3716708009009AABCD /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
+		F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 		F8095BE81667E66C00CB3654 = {
 			isa = PBXGroup;
 			children = (
+				F8D9AC35166FFE1C009AABCD /* README.md */,
 				F8095BFD1667E66C00CB3654 /* SYEmojiPopoverExample */,
 				F8095C601667E78500CB3654 /* SYEmojiPopover */,
 				F8095BF61667E66C00CB3654 /* Frameworks */,
@@ -160,6 +165,8 @@
 			children = (
 				F8095C611667E7B600CB3654 /* SYEmojiPopover.h */,
 				F8095C621667E7B600CB3654 /* SYEmojiPopover.m */,
+				F8D9AC3716708009009AABCD /* SYEmojiCharacters.h */,
+				F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */,
 			);
 			name = SYEmojiPopover;
 			path = ../SYEmojiPopover;
@@ -261,6 +268,7 @@
 				F8095C171667E66C00CB3654 /* SYViewController.m in Sources */,
 				F8095C201667E70600CB3654 /* PopoverView.m in Sources */,
 				F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */,
+				F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
