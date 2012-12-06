@@ -1,6 +1,6 @@
 [submodule "Libs/PopoverView"]
 	path = Libs/PopoverView
 	url = git://github.com/runway20/PopoverView.git
-[submodule "Libs/GMGridView"]
-	path = Libs/GMGridView
-	url = https://github.com/gmoledina/GMGridView.git
+[submodule "Libs/KKGridView"]
+	path = Libs/KKGridView
+	url = https://github.com/kolinkrewinkel/KKGridView.git
