@@ -49,7 +49,8 @@
 #pragma mark - IBActions
 - (IBAction)selectEmojiClick:(id)sender {
     
-    self->_emojiPopover = [[SYEmojiPopover alloc] init];
+    if(!self->_emojiPopover)
+        self->_emojiPopover = [[SYEmojiPopover alloc] init];
     
     [self->_emojiPopover setDelegate:self];
     [self->_emojiPopover showFromPoint:self.buttonEmoji.center inView:self.view];

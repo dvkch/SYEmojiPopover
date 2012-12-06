@@ -126,16 +126,16 @@
             // so that cells cannot be moved
             gridView.enableEditOnLongPress = NO;
             gridView.sortingDelegate = nil;
-            
             gridView.actionDelegate = self;
-            gridView.dataSource = self;
             
             gridView.delegate = self;
             
             [self->_scrollView addSubview:gridView];
             [self->_gridViews addObject:gridView];
             
-            [gridView reloadData];
+            NSLog(@"zou");
+            if(gridView.dataSource == nil)
+                gridView.dataSource = self;
         }
     }
 }
@@ -206,10 +206,35 @@
 #pragma mark - UIScrollViewDelegate methods
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    if(scrollView == self->_scrollView)
+    if(scrollView == self->_scrollView) {
         [self setScrollEnabledAllGridViews:NO];
-    else
+        return;
+        
+/*
+        CGFloat pageWidth = self->_scrollView.frame.size.width;
+        int pageIndex = (floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
+        if(pageIndex >= [[SYEmojiCharacters sharedCharacters] numberOfSections] || pageIndex < 0)
+            pageIndex = 0;
+        
+        GMGridView *grid_n = [self->_gridViews objectAtIndex:pageIndex];
+        GMGridView *grid_n_minus_1 = nil;
+        if(pageIndex >= 1)
+            grid_n_minus_1 = [self->_gridViews objectAtIndex:pageIndex];
+        GMGridView *grid_n_plus_1 = nil;
+        if(pageIndex -1 < [[SYEmojiCharacters sharedCharacters] numberOfSections])
+            grid_n_plus_1 = [self->_gridViews objectAtIndex:pageIndex];
+        
+        if(grid_n && grid_n.delegate == nil)
+            grid_n.delegate = self;
+        if(grid_n_minus_1 && grid_n_minus_1.delegate == nil)
+            grid_n_minus_1.delegate = self;
+        if(grid_n_plus_1 && grid_n_plus_1.delegate == nil)
+            grid_n_plus_1.delegate = self;
+        */
+    }
+    else {
         [self->_scrollView setScrollEnabled:NO];
+    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
