@@ -12,8 +12,8 @@
 #import "SYEmojiCharacters.h"
 
 #define EMOJI_RUNNING_IPHONE        ( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-#define EMOJI_ITEM_SIZE             ( EMOJI_RUNNING_IPHONE ? 40.f : 50.f )
-#define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 32.f : 45.f )
+#define EMOJI_ITEM_SIZE             ( EMOJI_RUNNING_IPHONE ? 40.f : 40.f )
+#define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 32.f : 32.f )
 #define EMOJI_NB_ITEM_IN_ROW        ( EMOJI_RUNNING_IPHONE ? 7.f : 7.f )
 #define EMOJI_NB_ITEM_IN_COL        ( EMOJI_RUNNING_IPHONE ? 4.f : 4.f )
 #define EMOJI_GRID_MARGIN           ( EMOJI_RUNNING_IPHONE ? 1.f : 2.f )
@@ -186,18 +186,10 @@
 
 -(void)showFromPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title
 {
-    [self showFromPoint:point
-                 inView:view
-              withTitle:title
-               withSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT + EMOJI_PAGECONTROL_HEIGHT)];
-}
-
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString *)title withSize:(CGSize)size
-{
     if(!self->_mainView)
         [self loadView];
     
-    [self updateFramesForSize:size];
+    [self updateFramesForSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT + EMOJI_PAGECONTROL_HEIGHT)];
     [self loadPage:0];
     [self loadPage:1];
     

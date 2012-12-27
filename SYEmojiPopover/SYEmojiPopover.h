@@ -32,8 +32,6 @@ UIScrollViewDelegate>
 @property (weak, atomic) id<SYEmojiPopoverDelegate> delegate;
 
 -(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title;
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title withSize:(CGSize)size;
-
 -(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration;
 
 @end
