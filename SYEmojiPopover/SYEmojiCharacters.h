@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMGridView.h"
 
 // thanks to yasirmturk : http://stackoverflow.com/questions/3339722/check-iphone-ios-version/5337804#5337804
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)

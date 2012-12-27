@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GMGridView.h"
 
 @class PopoverView;
 @class SYEmojiPopover;
@@ -18,23 +17,24 @@
 @end
 
 @interface SYEmojiPopover : UIView
-<GMGridViewActionDelegate,
-GMGridViewDataSource,
+<UITableViewDataSource,
+UITableViewDelegate,
 UIScrollViewDelegate>
 {
 @private
     UIView *_mainView;
     UIPageControl *_pageControl;
     UIScrollView *_scrollView;
-    NSMutableArray *_gridViews;
+    NSMutableArray *_tableViews;
     PopoverView *_popover;
 }
 
 @property (weak, atomic) id<SYEmojiPopoverDelegate> delegate;
 
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view;
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view withSize:(CGSize)size;
+-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title;
+-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title withSize:(CGSize)size;
 
 -(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration;
 
 @end
+

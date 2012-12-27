@@ -21,11 +21,6 @@
 		F8095C201667E70600CB3654 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C1F1667E70600CB3654 /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C621667E7B600CB3654 /* SYEmojiPopover.m */; };
 		F8095C651667EFB600CB3654 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095C641667EFB600CB3654 /* QuartzCore.framework */; };
-		F8BE23E8167E0DF000CFE2BB /* GMGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE23D8167E0DF000CFE2BB /* GMGridView.m */; };
-		F8BE23E9167E0DF000CFE2BB /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE23DE167E0DF000CFE2BB /* GMGridViewCell.m */; };
-		F8BE23EA167E0DF000CFE2BB /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE23E0167E0DF000CFE2BB /* GMGridViewLayoutStrategies.m */; };
-		F8BE23EB167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE23E2167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.m */; };
-		F8BE23EC167E0DF000CFE2BB /* UIView+GMGridViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE23E4167E0DF000CFE2BB /* UIView+GMGridViewAdditions.m */; };
 		F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */; };
 /* End PBXBuildFile section */
 
@@ -51,18 +46,6 @@
 		F8095C611667E7B600CB3654 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
 		F8095C621667E7B600CB3654 /* SYEmojiPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiPopover.m; sourceTree = "<group>"; };
 		F8095C641667EFB600CB3654 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F8BE23D6167E0DF000CFE2BB /* GMGridView-Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridView-Constants.h"; sourceTree = "<group>"; };
-		F8BE23D7167E0DF000CFE2BB /* GMGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridView.h; sourceTree = "<group>"; };
-		F8BE23D8167E0DF000CFE2BB /* GMGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridView.m; sourceTree = "<group>"; };
-		F8BE23DC167E0DF000CFE2BB /* GMGridViewCell+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMGridViewCell+Extended.h"; sourceTree = "<group>"; };
-		F8BE23DD167E0DF000CFE2BB /* GMGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewCell.h; sourceTree = "<group>"; };
-		F8BE23DE167E0DF000CFE2BB /* GMGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewCell.m; sourceTree = "<group>"; };
-		F8BE23DF167E0DF000CFE2BB /* GMGridViewLayoutStrategies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMGridViewLayoutStrategies.h; sourceTree = "<group>"; };
-		F8BE23E0167E0DF000CFE2BB /* GMGridViewLayoutStrategies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMGridViewLayoutStrategies.m; sourceTree = "<group>"; };
-		F8BE23E1167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIGestureRecognizer+GMGridViewAdditions.h"; sourceTree = "<group>"; };
-		F8BE23E2167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIGestureRecognizer+GMGridViewAdditions.m"; sourceTree = "<group>"; };
-		F8BE23E3167E0DF000CFE2BB /* UIView+GMGridViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GMGridViewAdditions.h"; sourceTree = "<group>"; };
-		F8BE23E4167E0DF000CFE2BB /* UIView+GMGridViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GMGridViewAdditions.m"; sourceTree = "<group>"; };
 		F8D9AC35166FFE1C009AABCD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F8D9AC3716708009009AABCD /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
 		F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
@@ -154,7 +137,6 @@
 		F8095C211667E70B00CB3654 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				F8BE23D5167E0DF000CFE2BB /* GMGridView */,
 				F8095C1D1667E70600CB3654 /* PopoverView */,
 			);
 			name = Libs;
@@ -170,26 +152,6 @@
 			);
 			name = SYEmojiPopover;
 			path = ../SYEmojiPopover;
-			sourceTree = "<group>";
-		};
-		F8BE23D5167E0DF000CFE2BB /* GMGridView */ = {
-			isa = PBXGroup;
-			children = (
-				F8BE23D6167E0DF000CFE2BB /* GMGridView-Constants.h */,
-				F8BE23D7167E0DF000CFE2BB /* GMGridView.h */,
-				F8BE23D8167E0DF000CFE2BB /* GMGridView.m */,
-				F8BE23DC167E0DF000CFE2BB /* GMGridViewCell+Extended.h */,
-				F8BE23DD167E0DF000CFE2BB /* GMGridViewCell.h */,
-				F8BE23DE167E0DF000CFE2BB /* GMGridViewCell.m */,
-				F8BE23DF167E0DF000CFE2BB /* GMGridViewLayoutStrategies.h */,
-				F8BE23E0167E0DF000CFE2BB /* GMGridViewLayoutStrategies.m */,
-				F8BE23E1167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.h */,
-				F8BE23E2167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.m */,
-				F8BE23E3167E0DF000CFE2BB /* UIView+GMGridViewAdditions.h */,
-				F8BE23E4167E0DF000CFE2BB /* UIView+GMGridViewAdditions.m */,
-			);
-			name = GMGridView;
-			path = ../Libs/GMGridView/GMGridView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,11 +227,6 @@
 				F8095C201667E70600CB3654 /* PopoverView.m in Sources */,
 				F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */,
 				F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */,
-				F8BE23E8167E0DF000CFE2BB /* GMGridView.m in Sources */,
-				F8BE23E9167E0DF000CFE2BB /* GMGridViewCell.m in Sources */,
-				F8BE23EA167E0DF000CFE2BB /* GMGridViewLayoutStrategies.m in Sources */,
-				F8BE23EB167E0DF000CFE2BB /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
-				F8BE23EC167E0DF000CFE2BB /* UIView+GMGridViewAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

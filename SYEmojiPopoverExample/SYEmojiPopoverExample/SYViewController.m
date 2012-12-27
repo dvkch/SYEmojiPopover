@@ -48,12 +48,11 @@
 
 #pragma mark - IBActions
 - (IBAction)selectEmojiClick:(id)sender {
-    
     if(!self->_emojiPopover)
         self->_emojiPopover = [[SYEmojiPopover alloc] init];
     
     [self->_emojiPopover setDelegate:self];
-    [self->_emojiPopover showFromPoint:self.buttonEmoji.center inView:self.view];
+    [self->_emojiPopover showFromPoint:self.buttonEmoji.center inView:self.view withTitle:@"Click on a character to see it in big"];
 }
 
 #pragma mark - SYEmojiPopoverDelegate methods

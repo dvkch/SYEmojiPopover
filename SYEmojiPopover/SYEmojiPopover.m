@@ -8,26 +8,38 @@
 
 #import "SYEmojiPopover.h"
 
-#import "GMGridView.h"
-#import "GMGridViewLayoutStrategies.h"
-
 #import "PopoverView.h"
 #import "SYEmojiCharacters.h"
 
 #define EMOJI_RUNNING_IPHONE        ( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
-#define EMOJI_ITEM_SIZE             ( EMOJI_RUNNING_IPHONE ? 33.f : 45.f )
-#define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 29.f : 39.f )
-#define EMOJI_NB_ITEM_IN_ROW        ( EMOJI_RUNNING_IPHONE ? 8 : 8 )
-#define EMOJI_NB_ITEM_IN_COL        ( EMOJI_RUNNING_IPHONE ? 5 : 5 )
+#define EMOJI_ITEM_SIZE             ( EMOJI_RUNNING_IPHONE ? 40.f : 50.f )
+#define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 32.f : 45.f )
+#define EMOJI_NB_ITEM_IN_ROW        ( EMOJI_RUNNING_IPHONE ? 7.f : 7.f )
+#define EMOJI_NB_ITEM_IN_COL        ( EMOJI_RUNNING_IPHONE ? 4.f : 4.f )
 #define EMOJI_GRID_MARGIN           ( EMOJI_RUNNING_IPHONE ? 1.f : 2.f )
 #define EMOJI_GRID_DEFAULT_WIDTH    ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_ROW + EMOJI_GRID_MARGIN * 2.f )
 #define EMOJI_GRID_DEFAULT_HEIGHT   ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_COL + EMOJI_GRID_MARGIN * 2.f )
 #define EMOJI_PAGECONTROL_HEIGHT    10.f
 
+@interface SYEmojiPopoverCell : UITableViewCell {
+    NSUInteger _row;
+    NSUInteger _page;
+    NSMutableArray *_buttons;
+}
+@property (nonatomic, copy) void (^clickedCharacter) (NSString*);
+
+-(void)setRow:(NSUInteger)row andPage:(NSUInteger)page;
+-(void)refresh;
+-(void)refreshLayout;
+-(void)emojiButtonTapped:(id)sender;
+@end
+
+
 @interface SYEmojiPopover (Private)
 -(void)loadView;
+-(void)loadPage:(int)pageIndex;
 -(void)updateFramesForSize:(CGSize)size;
--(void)setScrollEnabledAllGridViews:(BOOL)enabled;
+-(void)setScrollEnabledAllTableViews:(BOOL)enabled;
 @end
 
 @implementation SYEmojiPopover
@@ -102,40 +114,30 @@
     [self->_mainView addSubview:self->_scrollView];
     
     /*************************************/
-    /**********  GridView INIT  **********/
+    /**********  TableView INIT  *********/
     /*************************************/
-    if(!self->_gridViews) {
-        self->_gridViews = [NSMutableArray arrayWithCapacity:numberOfSections];
+    if(!self->_tableViews) {
+        self->_tableViews = [NSMutableArray arrayWithCapacity:numberOfSections];
         for(int i = 0; i < numberOfSections; ++i)
         {
-            GMGridView *gridView = [[GMGridView alloc] initWithFrame:CGRectMake(0.f, 0.f, 1.f, 1.f)];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, 1.f, 1.f)];
             
-            gridView.autoresizingMask = UIViewAutoresizingNone;
-            gridView.backgroundColor = [UIColor clearColor];
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            tableView.rowHeight = EMOJI_ITEM_SIZE;
             
-            gridView.style = GMGridViewStyleSwap;
-            gridView.itemSpacing = 0.f;
-            gridView.minEdgeInsets = UIEdgeInsetsMake(EMOJI_GRID_MARGIN, EMOJI_GRID_MARGIN,
-                                                      EMOJI_GRID_MARGIN, EMOJI_GRID_MARGIN);
-            gridView.centerGrid = NO;
-            gridView.showsVerticalScrollIndicator = YES;
-            gridView.showsHorizontalScrollIndicator = NO;
-            gridView.alwaysBounceVertical = YES;
-            gridView.clipsToBounds = YES;
+            tableView.autoresizingMask = UIViewAutoresizingNone;
+            tableView.backgroundColor = [UIColor clearColor];
             
-            // so that cells cannot be moved
-            gridView.enableEditOnLongPress = NO;
-            gridView.sortingDelegate = nil;
-            gridView.actionDelegate = self;
+            tableView.showsVerticalScrollIndicator = YES;
+            tableView.showsHorizontalScrollIndicator = NO;
+            tableView.alwaysBounceVertical = YES;
+            tableView.clipsToBounds = YES;
             
-            gridView.delegate = self;
+            tableView.delegate = self;
+            tableView.dataSource = nil;
             
-            [self->_scrollView addSubview:gridView];
-            [self->_gridViews addObject:gridView];
-            
-            NSLog(@"zou");
-            if(gridView.dataSource == nil)
-                gridView.dataSource = self;
+            [self->_scrollView addSubview:tableView];
+            [self->_tableViews addObject:tableView];
         }
     }
 }
@@ -143,7 +145,7 @@
 -(void)updateFramesForSize:(CGSize)size
 {
     int numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
-    CGFloat pageHeight = size.height - EMOJI_PAGECONTROL_HEIGHT;
+    CGFloat pageHeight = size.height - EMOJI_PAGECONTROL_HEIGHT - 2.f;
     
     if(self->_mainView)
         [self->_mainView setFrame:CGRectMake(0.f, 0.f, size.width, size.height)];
@@ -152,49 +154,63 @@
         [self->_pageControl setFrame:CGRectMake(0.f, 0.f, size.width, EMOJI_PAGECONTROL_HEIGHT)];
     
     if(self->_scrollView) {
-        [self->_scrollView setFrame:CGRectMake(0.f, EMOJI_PAGECONTROL_HEIGHT, size.width, pageHeight)];
+        [self->_scrollView setFrame:CGRectMake(0.f, EMOJI_PAGECONTROL_HEIGHT + 2.f, size.width, pageHeight)];
         [self->_scrollView setContentSize:CGSizeMake(size.width * numberOfSections, pageHeight)];
     }
     
-    if(self->_gridViews) {
-        for(int i = 0; i < [self->_gridViews count]; ++i)
-            [(GMGridView*)[self->_gridViews objectAtIndex:i] setFrame:CGRectMake(i * size.width, 0.f, size.width, pageHeight)];
+    if(self->_tableViews) {
+        for(int i = 0; i < [self->_tableViews count]; ++i)
+            [(UITableView*)[self->_tableViews objectAtIndex:i] setFrame:CGRectMake(i * size.width, 0.f, size.width, pageHeight)];
     }
 }
 
--(void)setScrollEnabledAllGridViews:(BOOL)enabled
+-(void)setScrollEnabledAllTableViews:(BOOL)enabled
 {
-    for(GMGridView *gridView in self->_gridViews)
-        [gridView setScrollEnabled:enabled];
+    for(UITableView *tableView in self->_tableViews)
+        [tableView setScrollEnabled:enabled];
 }
 
+-(void)loadPage:(int)pageIndex
+{
+    if(pageIndex < 0 || pageIndex >= [self->_tableViews count])
+        return;
+    
+    UITableView *tableView = [self->_tableViews objectAtIndex:pageIndex];
+    if(tableView.dataSource == nil) {
+        tableView.dataSource = self;
+        [tableView reloadData];
+    }
+}
 
 #pragma mark - View methods
 
--(void)showFromPoint:(CGPoint)point inView:(UIView *)view {
-    
+-(void)showFromPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title
+{
     [self showFromPoint:point
                  inView:view
+              withTitle:title
                withSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT + EMOJI_PAGECONTROL_HEIGHT)];
 }
 
--(void)showFromPoint:(CGPoint)point inView:(UIView*)view withSize:(CGSize)size {
-    
+-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString *)title withSize:(CGSize)size
+{
     if(!self->_mainView)
         [self loadView];
     
     [self updateFramesForSize:size];
+    [self loadPage:0];
+    [self loadPage:1];
     
     [self->_popover setAutoresizingMask:UIViewAutoresizingNone];
     self->_popover = [PopoverView showPopoverAtPoint:point
                                               inView:view
-                                           withTitle:@"Emoji selection"
+                                           withTitle:title
                                      withContentView:self->_mainView
                                             delegate:nil];
 }
 
--(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration {
-
+-(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration
+{
     if(!self->_popover)
         return;
     
@@ -206,40 +222,23 @@
 #pragma mark - UIScrollViewDelegate methods
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    CGFloat pageWidth = self->_scrollView.frame.size.width;
+    int pageIndex = (floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
+    
     if(scrollView == self->_scrollView) {
-        [self setScrollEnabledAllGridViews:NO];
-        return;
+        [self setScrollEnabledAllTableViews:NO];
         
-/*
-        CGFloat pageWidth = self->_scrollView.frame.size.width;
-        int pageIndex = (floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
-        if(pageIndex >= [[SYEmojiCharacters sharedCharacters] numberOfSections] || pageIndex < 0)
-            pageIndex = 0;
-        
-        GMGridView *grid_n = [self->_gridViews objectAtIndex:pageIndex];
-        GMGridView *grid_n_minus_1 = nil;
-        if(pageIndex >= 1)
-            grid_n_minus_1 = [self->_gridViews objectAtIndex:pageIndex];
-        GMGridView *grid_n_plus_1 = nil;
-        if(pageIndex -1 < [[SYEmojiCharacters sharedCharacters] numberOfSections])
-            grid_n_plus_1 = [self->_gridViews objectAtIndex:pageIndex];
-        
-        if(grid_n && grid_n.delegate == nil)
-            grid_n.delegate = self;
-        if(grid_n_minus_1 && grid_n_minus_1.delegate == nil)
-            grid_n_minus_1.delegate = self;
-        if(grid_n_plus_1 && grid_n_plus_1.delegate == nil)
-            grid_n_plus_1.delegate = self;
-        */
+        [self loadPage:pageIndex-1];
+        [self loadPage:pageIndex];
+        [self loadPage:pageIndex+1];
     }
-    else {
+    else
         [self->_scrollView setScrollEnabled:NO];
-    }
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    [self setScrollEnabledAllGridViews:YES];
+    [self setScrollEnabledAllTableViews:YES];
     [self->_scrollView setScrollEnabled:YES];
 }
 
@@ -254,74 +253,161 @@
     [self->_pageControl setCurrentPage:pageIndex];
 }
 
-#pragma mark - SYGalleryDataSource methods
-- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
+#pragma mark - UITableViewDataSource methods
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSUInteger section = [self->_gridViews indexOfObject:gridView];
-    if(section == NSNotFound)
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSUInteger page = [self->_tableViews indexOfObject:tableView];
+    if(page == NSNotFound)
         return 0;
     
-    return [[SYEmojiCharacters sharedCharacters] numberOfRowsInSection:section];
+    CGFloat nbCharacters = (CGFloat)[[SYEmojiCharacters sharedCharacters] numberOfRowsInSection:page];
+    return ceil(nbCharacters / EMOJI_NB_ITEM_IN_ROW);
 }
 
-- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(EMOJI_ITEM_SIZE, EMOJI_ITEM_SIZE);
-}
-
-- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index
-{
-    NSUInteger section = [self->_gridViews indexOfObject:gridView];
-    if(section == NSNotFound)
-        return [[GMGridViewCell alloc] init];
+    NSUInteger page = [self->_tableViews indexOfObject:tableView];
+    if(page == NSNotFound)
+        return [[UITableViewCell alloc] init];
     
-    NSString *text = [[SYEmojiCharacters sharedCharacters] emojiAtRow:index andSection:section];
+    NSString *text = [[SYEmojiCharacters sharedCharacters] emojiAtRow:indexPath.row andSection:page];
     if(!text)
         text = @"";
     
     NSString *cellIdentifier = @"cellEmoji";
-    GMGridViewCell *cell = [gridView dequeueReusableCellWithIdentifier:cellIdentifier];
+    SYEmojiPopoverCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell)
-        cell = [[GMGridViewCell alloc] init];
+        cell = [[SYEmojiPopoverCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    [cell setReuseIdentifier:cellIdentifier];
+    [cell setRow:indexPath.row andPage:page];
     
-    UITextField *textView = (UITextField*)cell.contentView;
-    if(!textView)
-        textView = [[UITextField alloc] initWithFrame:cell.bounds];
-    
-    [textView setText:text];
-    [textView setFont:[UIFont fontWithName:@"AppleColorEmoji" size:EMOJI_FONT_SIZE]];
-    [textView setBackgroundColor:[UIColor clearColor]];
-    [textView setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
-    [textView setTextAlignment:NSTextAlignmentCenter];
-    [textView setUserInteractionEnabled:NO];
-    
-    [cell setBackgroundColor:[UIColor clearColor]];
-    [cell setContentView:textView];
+    if(!cell.clickedCharacter)
+    {
+        [cell setClickedCharacter:^(NSString *character) {
+            SEL clickSel = @selector(emojiPopover:didClickedOnCharacter:);
+            if([self.delegate respondsToSelector:clickSel])
+                [self.delegate emojiPopover:self didClickedOnCharacter:character];
+            
+            [self->_popover dismiss];
+        }];
+    }
     
     return cell;
 }
 
-- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
-{
-    return NO;
-}
 
-#pragma mark - GMGridViewActionDelegate methods
-- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath { return NO; }
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath { return NO; }
+
+
+#pragma mark - UITableViewDelegate methods
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-    NSUInteger section = [self->_gridViews indexOfObject:gridView];
-    if(section == NSNotFound)
-        return;
-    
-    if(position < 0 || position >= [[SYEmojiCharacters sharedCharacters] numberOfRowsInSection:section])
-        return;
-    
-    if([self.delegate respondsToSelector:@selector(emojiPopover:didClickedOnCharacter:)])
-        [self.delegate emojiPopover:self didClickedOnCharacter:[[SYEmojiCharacters sharedCharacters] emojiAtRow:position andSection:section]];
-    
-    [self->_popover dismiss];
+    return UITableViewCellEditingStyleNone;
 }
 
 @end
+
+
+
+
+@implementation SYEmojiPopoverCell
+
+@synthesize clickedCharacter;
+
+-(void)setRow:(NSUInteger)row andPage:(NSUInteger)page
+{
+    self->_row = row;
+    self->_page = page;
+    [self refresh];
+}
+
+-(void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    [self refreshLayout];
+}
+
+#pragma mark - Display
+-(void)refresh
+{
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [self setAccessoryType:UITableViewCellAccessoryNone];
+    [self setBackgroundColor:[UIColor clearColor]];
+    
+    if(!self->_buttons)
+    {
+        self->_buttons = [NSMutableArray arrayWithCapacity:EMOJI_NB_ITEM_IN_ROW];
+        for(uint i = 0; i < EMOJI_NB_ITEM_IN_ROW; ++i)
+        {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            
+            [button setBackgroundColor:[UIColor clearColor]];
+            [button setTitle:@"" forState:UIControlStateNormal];
+            [button.titleLabel setFont:[UIFont fontWithName:@"AppleColorEmoji" size:EMOJI_FONT_SIZE]];
+            [button.titleLabel setTextAlignment:NSTextAlignmentCenter];
+            
+            [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+            [button addTarget:self action:@selector(emojiButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+            [self->_buttons addObject:button];
+            [self addSubview:button];
+        }
+    }
+    
+    NSUInteger firstCharacterIndex = self->_row * EMOJI_NB_ITEM_IN_ROW;
+    for(uint i = 0; i < EMOJI_NB_ITEM_IN_ROW; ++i)
+    {
+        UIButton *button = [self->_buttons objectAtIndex:i];
+        
+        NSString *character = [[SYEmojiCharacters sharedCharacters] emojiAtRow:(i + firstCharacterIndex) andSection:self->_page];
+        if(!character)
+            character = @"";
+        
+        [button setTitle:character forState:UIControlStateNormal];
+    }
+
+    [self refreshLayout];
+
+//    return CGSizeMake(EMOJI_ITEM_SIZE, EMOJI_ITEM_SIZE);
+//    [textView setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+}
+
+-(void)refreshLayout
+{
+    if(!self->_buttons || [self->_buttons count] != EMOJI_NB_ITEM_IN_ROW)
+        return;
+    
+    CGFloat itemWidth = self.frame.size.width / EMOJI_NB_ITEM_IN_ROW;
+    CGFloat itemInternalWidth = itemWidth * 0.9f;
+    for(uint i = 0; i < EMOJI_NB_ITEM_IN_ROW; ++i)
+    {
+        UIButton *button = [self->_buttons objectAtIndex:i];
+        [button setFrame:CGRectMake(i * itemWidth, 0.f, itemInternalWidth, self.frame.size.height)];
+    }
+}
+
+#pragma mark - Button click
+-(void)emojiButtonTapped:(id)sender
+{
+    NSString *character = @"";
+    if([sender isKindOfClass:[UIButton class]])
+        character = [(UIButton*)sender titleForState:UIControlStateNormal];
+    
+    if(![[SYEmojiCharacters sharedCharacters] isCharacterEmoji:character])
+        return;
+    
+    if(self.clickedCharacter)
+        self.clickedCharacter(character);
+}
+
+@end
+
+
