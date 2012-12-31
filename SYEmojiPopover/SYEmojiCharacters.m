@@ -35,7 +35,7 @@
 {
     for(NSArray *panel in self->_characters)
         for(NSString *emoji in panel)
-            if([emoji isEqualToString:string])
+            if([emoji isEqualToString:[string stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]])
                 return YES;
     
     return NO;
