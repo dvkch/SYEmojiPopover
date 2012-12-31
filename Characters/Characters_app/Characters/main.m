@@ -81,13 +81,11 @@ int main(int argc, char *argv[])
             
             for(uint i = 0; i < [sCharacters count]; ++i) {
                 
-                c = [sCharacters objectAtIndex:i];
-                
-//                NSLog(@"%s", [c UTF8String]);
-                
+                c = [[sCharacters objectAtIndex:i] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
                 strOUT = [strOUT stringByAppendingFormat:@"@\"%@\"%@", c, (i+1 == [sCharacters count] ? @"" : @", ")];
                 
-                if(i % 10 == 9) // filled a line of 10 characters
+                int nbEmojiPerLine = 5;
+                if(i % nbEmojiPerLine == nbEmojiPerLine - 1) // filled a line of 10 characters
                     strOUT = [strOUT stringByAppendingString:@"\n            "];
             }
             strOUT = [strOUT stringByAppendingString:@"];"];
