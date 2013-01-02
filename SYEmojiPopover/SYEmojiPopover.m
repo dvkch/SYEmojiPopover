@@ -268,10 +268,6 @@
     if(page == NSNotFound)
         return [[UITableViewCell alloc] init];
     
-    NSString *text = [[SYEmojiCharacters sharedCharacters] emojiAtRow:indexPath.row andSection:page];
-    if(!text)
-        text = @"";
-    
     NSString *cellIdentifier = @"cellEmoji";
     SYEmojiPopoverCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if(!cell)
