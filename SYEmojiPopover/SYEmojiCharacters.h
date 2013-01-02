@@ -25,8 +25,8 @@
 
 -(BOOL)isCharacterEmoji:(NSString *)string;
 
--(NSInteger)numberOfSections;
--(NSInteger)numberOfRowsInSection:(NSUInteger)section;
+-(NSUInteger)numberOfSections;
+-(NSUInteger)numberOfRowsInSection:(NSUInteger)section;
 -(NSString*)emojiAtRow:(NSUInteger)row andSection:(NSUInteger)section;
 
 @end

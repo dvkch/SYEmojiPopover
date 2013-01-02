@@ -41,12 +41,12 @@
     return NO;
 }
 
--(NSInteger)numberOfSections
+-(NSUInteger)numberOfSections
 {
     return [self->_characters count];
 }
 
--(NSInteger)numberOfRowsInSection:(NSUInteger)section
+-(NSUInteger)numberOfRowsInSection:(NSUInteger)section
 {
     if(section >= [self numberOfSections])
         return 0;

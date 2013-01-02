@@ -60,7 +60,7 @@
 #pragma mark - Private methods
 -(void)loadView {
     
-    int numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
+    uint numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
     
     /*************************************/
     /**********  MainView INIT  **********/
@@ -118,7 +118,7 @@
     /*************************************/
     if(!self->_tableViews) {
         self->_tableViews = [NSMutableArray arrayWithCapacity:numberOfSections];
-        for(int i = 0; i < numberOfSections; ++i)
+        for(uint i = 0; i < numberOfSections; ++i)
         {
             UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.f, 0.f, 1.f, 1.f)];
             
@@ -144,7 +144,7 @@
 
 -(void)updateFramesForSize:(CGSize)size
 {
-    int numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
+    uint numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
     CGFloat pageHeight = size.height - EMOJI_PAGECONTROL_HEIGHT - 2.f;
     
     if(self->_mainView)
@@ -159,7 +159,7 @@
     }
     
     if(self->_tableViews) {
-        for(int i = 0; i < [self->_tableViews count]; ++i)
+        for(uint i = 0; i < [self->_tableViews count]; ++i)
             [(UITableView*)[self->_tableViews objectAtIndex:i] setFrame:CGRectMake(i * size.width, 0.f, size.width, pageHeight)];
     }
 }
@@ -172,10 +172,10 @@
 
 -(void)loadPage:(int)pageIndex
 {
-    if(pageIndex < 0 || pageIndex >= [self->_tableViews count])
+    if(pageIndex < 0 || pageIndex >= (int)[self->_tableViews count])
         return;
     
-    UITableView *tableView = [self->_tableViews objectAtIndex:pageIndex];
+    UITableView *tableView = [self->_tableViews objectAtIndex:(uint)pageIndex];
     if(tableView.dataSource == nil) {
         tableView.dataSource = self;
         [tableView reloadData];
@@ -215,7 +215,7 @@
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = self->_scrollView.frame.size.width;
-    int pageIndex = (floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
+    int pageIndex = ((int)floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
     
     if(scrollView == self->_scrollView) {
         [self setScrollEnabledAllTableViews:NO];
@@ -237,9 +237,9 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     CGFloat pageWidth = self->_scrollView.frame.size.width;
-    int pageIndex = (floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
+    int pageIndex = ((int)floor((self->_scrollView.contentOffset.x - pageWidth / 2.f) / pageWidth) + 1);
     
-    if(pageIndex >= [[SYEmojiCharacters sharedCharacters] numberOfSections] || pageIndex < 0)
+    if(pageIndex >= (int)[[SYEmojiCharacters sharedCharacters] numberOfSections] || pageIndex < 0)
         pageIndex = 0;
     
     [self->_pageControl setCurrentPage:pageIndex];
@@ -259,7 +259,7 @@
         return 0;
     
     CGFloat nbCharacters = (CGFloat)[[SYEmojiCharacters sharedCharacters] numberOfRowsInSection:page];
-    return ceil(nbCharacters / EMOJI_NB_ITEM_IN_ROW);
+    return (int)ceil(nbCharacters / EMOJI_NB_ITEM_IN_ROW);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -273,7 +273,7 @@
     if(!cell)
         cell = [[SYEmojiPopoverCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    [cell setRow:indexPath.row andPage:page];
+    [cell setRow:(uint)indexPath.row andPage:page];
     
     if(!cell.clickedCharacter)
     {
@@ -350,7 +350,7 @@
         }
     }
     
-    NSUInteger firstCharacterIndex = self->_row * EMOJI_NB_ITEM_IN_ROW;
+    NSUInteger firstCharacterIndex = self->_row * (uint)EMOJI_NB_ITEM_IN_ROW;
     for(uint i = 0; i < EMOJI_NB_ITEM_IN_ROW; ++i)
     {
         UIButton *button = [self->_buttons objectAtIndex:i];
