@@ -6,10 +6,15 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/dvkch/SYEmojiPopover'
   s.author   = { 'Stan Chevallier' => 'contact@stanislaschevallier.fr' }
   s.source   = { :git => 'https://github.com/dvkch/SYEmojiPopover.git', :submodules => true }
-  s.source_files = 'SYEmojiPopover/*.{h,m}', 'Libs/PopoverView/PopoverView/*.{h,m}'
+  s.source_files = 'SYEmojiPopover/*.{h,m}'
   s.requires_arc = true
 
   s.xcconfig = { 'CLANG_MODULES_AUTOLINK' => 'YES' }
   s.ios.deployment_target = '5.0'
+  
+  s.subspec 'Deps' do |ss|
+    ss.source_files = 'Libs/PopoverView/PopoverView/*.{h,m}'
+    ss.requires_arc = false
+  end
   
 end
