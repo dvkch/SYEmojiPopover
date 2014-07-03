@@ -1,7 +1,7 @@
 SYEmojiPopover
 ==============
 
-Popover view to select emoji character from iOS 5+ possible characters. iOS 5+, ARC.
+Popover view to select emoji character from iOS 6+ possible characters. iOS 6+, ARC.
 
 After cloning the project please run:
 
@@ -36,7 +36,7 @@ It contains the following methods:
 
 
 
-The second class, `SYEmojiPopover`, is the popover view. The popover in itslef is made by Runway20 and can be found here: [PopoverView](https://github.com/runway20/PopoverView). The view in the popover is implemented with UITableView. It is much quicker than `GMGridView` that you may find in previous versions, but the ability to change the size of the control is a little bit harder, explaining why it hasn't been implemented yet.
+The second class, `SYEmojiPopover`, is the popover view. The popover in itslef is made by NicolasChengDev and can be found here: [WYPopoverController](https://github.com/nicolaschengdev/WYPopoverController). The view in the popover is implemented with UITableView. It is much quicker than `GMGridView` that you may find in previous versions, but the ability to change the size of the control is a little bit harder, explaining why it hasn't been implemented yet.
 
 Here are the methods you can use:
 
@@ -45,8 +45,6 @@ Here are the methods you can use:
 	
 	// show the control at the specified point of a view, using a title
 	-(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title;
-	// moves the control to another point, should be used when rotating the device
-	-(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration;
 
 
 The delegate property implements `SYEmojiPopoverDelegate`, consisting in those methods:
