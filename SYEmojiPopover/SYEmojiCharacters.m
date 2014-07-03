@@ -69,7 +69,6 @@
 #pragma mark - Private Methods
 -(void)loadCharacters
 {
-    NSLog(@"load characters");
     self->_characters = [NSMutableArray array];
     // ## Characters should all by separated by commas
     // ##
