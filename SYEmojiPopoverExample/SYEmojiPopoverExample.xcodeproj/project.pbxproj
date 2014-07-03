@@ -18,9 +18,10 @@
 		F8095C0E1667E66C00CB3654 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8095C0D1667E66C00CB3654 /* Default-568h@2x.png */; };
 		F8095C111667E66C00CB3654 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8095C0F1667E66C00CB3654 /* MainStoryboard.storyboard */; };
 		F8095C171667E66C00CB3654 /* SYViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C161667E66C00CB3654 /* SYViewController.m */; };
-		F8095C201667E70600CB3654 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C1F1667E70600CB3654 /* PopoverView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = F8095C621667E7B600CB3654 /* SYEmojiPopover.m */; };
 		F8095C651667EFB600CB3654 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8095C641667EFB600CB3654 /* QuartzCore.framework */; };
+		F8CDC32C1964C32300CCFCC9 /* WYPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CDC3291964C32200CCFCC9 /* WYPopoverController.m */; };
+		F8CDC32D1964C32300CCFCC9 /* WYStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = F8CDC32B1964C32300CCFCC9 /* WYStoryboardPopoverSegue.m */; };
 		F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */ = {isa = PBXBuildFile; fileRef = F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */; };
 /* End PBXBuildFile section */
 
@@ -41,11 +42,13 @@
 		F8095C101667E66C00CB3654 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F8095C151667E66C00CB3654 /* SYViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYViewController.h; sourceTree = "<group>"; };
 		F8095C161667E66C00CB3654 /* SYViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYViewController.m; sourceTree = "<group>"; };
-		F8095C1E1667E70600CB3654 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
-		F8095C1F1667E70600CB3654 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
 		F8095C611667E7B600CB3654 /* SYEmojiPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiPopover.h; sourceTree = "<group>"; };
 		F8095C621667E7B600CB3654 /* SYEmojiPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiPopover.m; sourceTree = "<group>"; };
 		F8095C641667EFB600CB3654 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F8CDC3281964C32200CCFCC9 /* WYPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPopoverController.h; sourceTree = "<group>"; };
+		F8CDC3291964C32200CCFCC9 /* WYPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPopoverController.m; sourceTree = "<group>"; };
+		F8CDC32A1964C32300CCFCC9 /* WYStoryboardPopoverSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		F8CDC32B1964C32300CCFCC9 /* WYStoryboardPopoverSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYStoryboardPopoverSegue.m; sourceTree = "<group>"; };
 		F8D9AC35166FFE1C009AABCD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		F8D9AC3716708009009AABCD /* SYEmojiCharacters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SYEmojiCharacters.h; sourceTree = "<group>"; };
 		F8D9AC3816708009009AABCD /* SYEmojiCharacters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SYEmojiCharacters.m; sourceTree = "<group>"; };
@@ -124,20 +127,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		F8095C1D1667E70600CB3654 /* PopoverView */ = {
-			isa = PBXGroup;
-			children = (
-				F8095C1E1667E70600CB3654 /* PopoverView.h */,
-				F8095C1F1667E70600CB3654 /* PopoverView.m */,
-			);
-			name = PopoverView;
-			path = ../Libs/PopoverView/PopoverView;
-			sourceTree = "<group>";
-		};
 		F8095C211667E70B00CB3654 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				F8095C1D1667E70600CB3654 /* PopoverView */,
+				F8CDC3271964C32200CCFCC9 /* WYPopoverController */,
 			);
 			name = Libs;
 			sourceTree = "<group>";
@@ -152,6 +145,18 @@
 			);
 			name = SYEmojiPopover;
 			path = ../SYEmojiPopover;
+			sourceTree = "<group>";
+		};
+		F8CDC3271964C32200CCFCC9 /* WYPopoverController */ = {
+			isa = PBXGroup;
+			children = (
+				F8CDC3281964C32200CCFCC9 /* WYPopoverController.h */,
+				F8CDC3291964C32200CCFCC9 /* WYPopoverController.m */,
+				F8CDC32A1964C32300CCFCC9 /* WYStoryboardPopoverSegue.h */,
+				F8CDC32B1964C32300CCFCC9 /* WYStoryboardPopoverSegue.m */,
+			);
+			name = WYPopoverController;
+			path = ../Libs/WYPopoverController/WYPopoverController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,8 +228,9 @@
 			files = (
 				F8095C041667E66C00CB3654 /* main.m in Sources */,
 				F8095C081667E66C00CB3654 /* SYAppDelegate.m in Sources */,
+				F8CDC32D1964C32300CCFCC9 /* WYStoryboardPopoverSegue.m in Sources */,
 				F8095C171667E66C00CB3654 /* SYViewController.m in Sources */,
-				F8095C201667E70600CB3654 /* PopoverView.m in Sources */,
+				F8CDC32C1964C32300CCFCC9 /* WYPopoverController.m in Sources */,
 				F8095C631667E7B600CB3654 /* SYEmojiPopover.m in Sources */,
 				F8D9AC3916708009009AABCD /* SYEmojiCharacters.m in Sources */,
 			);
@@ -319,7 +325,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				INFOPLIST_FILE = "SYEmojiPopoverExample/SYEmojiPopoverExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -340,7 +346,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				INFOPLIST_FILE = "SYEmojiPopoverExample/SYEmojiPopoverExample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

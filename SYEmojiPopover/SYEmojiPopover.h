@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class PopoverView;
+@class WYPopoverController;
 @class SYEmojiPopover;
 
 @protocol SYEmojiPopoverDelegate <NSObject>
@@ -16,23 +16,23 @@
 -(void)emojiPopover:(SYEmojiPopover*)emojiPopover didClickedOnCharacter:(NSString*)character;
 @end
 
-@interface SYEmojiPopover : UIView
+@interface SYEmojiPopover : UIViewController
 <UITableViewDataSource,
 UITableViewDelegate,
 UIScrollViewDelegate>
 {
 @private
-    UIView *_mainView;
+    UINavigationController *_navController;
     UIPageControl *_pageControl;
     UIScrollView *_scrollView;
     NSMutableArray *_tableViews;
-    PopoverView *_popover;
+    CGSize _preferredSize;
 }
 
 @property (weak, atomic) id<SYEmojiPopoverDelegate> delegate;
+@property (strong, readonly) WYPopoverController *popover;
 
 -(void)showFromPoint:(CGPoint)point inView:(UIView*)view withTitle:(NSString*)title;
--(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration;
 
 @end
 

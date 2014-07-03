@@ -69,6 +69,7 @@
 #pragma mark - Private Methods
 -(void)loadCharacters
 {
+    NSLog(@"load characters");
     self->_characters = [NSMutableArray array];
     // ## Characters should all by separated by commas
     // ##
@@ -79,8 +80,7 @@
     // ##
     // ##  iOS 6.0.1 character set from Emoji keyboard
     // ##
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0") &&
-        SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
         NSArray *chars_000 = @[
         @"%F0%9F%98%84", @"%F0%9F%98%83", @"%F0%9F%98%80", @"%F0%9F%98%8A", @"%E2%98%BA",
         @"%F0%9F%98%89", @"%F0%9F%98%8D", @"%F0%9F%98%98", @"%F0%9F%98%9A", @"%F0%9F%98%97",

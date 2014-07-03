@@ -12,9 +12,8 @@ Pod::Spec.new do |s|
   s.xcconfig = { 'CLANG_MODULES_AUTOLINK' => 'YES' }
   s.ios.deployment_target = '5.0'
   
-  s.subspec 'Deps' do |ss|
-    ss.source_files = 'Libs/PopoverView/PopoverView/*.{h,m}'
-    ss.requires_arc = false
+  s.subspec 'Libs' do |ss|
+    ss.source_files = 'Libs/WYPopoverController/WYPopoverController/WYPopoverController.{h,m}'
+    ss.requires_arc = true
   end
-  
 end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Syan. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "SYViewController.h"
 #import "SYEmojiPopover.h"
 #import "SYEmojiCharacters.h"
@@ -29,21 +30,25 @@
 }
 
 #pragma mark - View Lifecycle
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    for (UIView *v in @[self.labelEmoji, self.buttonEmoji]) {
+        [v setBackgroundColor:[UIColor whiteColor]];
+        [v.layer setCornerRadius:5.f];
+        [v.layer setShadowColor:[UIColor darkGrayColor].CGColor];
+        [v.layer setShadowOpacity:0.3f];
+        [v.layer setShadowRadius:2];
+        [v.layer setShadowOffset:CGSizeMake(0, 0)];
+        [v.layer setMasksToBounds:NO];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration
-{
-    if(self->_emojiPopover)
-    {
-        [self->_emojiPopover moveToPoint:self.buttonEmoji.center
-                                  inView:self.view
-                            withDuration:duration];
-    }
 }
 
 #pragma mark - IBActions
@@ -52,7 +57,9 @@
         self->_emojiPopover = [[SYEmojiPopover alloc] init];
     
     [self->_emojiPopover setDelegate:self];
-    [self->_emojiPopover showFromPoint:self.buttonEmoji.center inView:self.view withTitle:@"Click on a character to see it in big"];
+    CGPoint p = self.buttonEmoji.center;
+    p.y += self.buttonEmoji.frame.size.height / 2.f;
+    [self->_emojiPopover showFromPoint:p inView:self.view withTitle:@"Click on a character to see it in big"];
 }
 
 #pragma mark - SYEmojiPopoverDelegate methods
@@ -66,6 +73,7 @@
 
 - (void)viewDidUnload {
     [self setButtonEmoji:nil];
+    [self setLabelEmoji:nil];
     [super viewDidUnload];
 }
 @end

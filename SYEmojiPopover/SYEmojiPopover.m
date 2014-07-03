@@ -8,7 +8,7 @@
 
 #import "SYEmojiPopover.h"
 
-#import "PopoverView.h"
+#import "WYPopoverController.h"
 #import "SYEmojiCharacters.h"
 
 #define EMOJI_RUNNING_IPHONE        ( [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone )
@@ -16,10 +16,12 @@
 #define EMOJI_FONT_SIZE             ( EMOJI_RUNNING_IPHONE ? 32.f : 32.f )
 #define EMOJI_NB_ITEM_IN_ROW        ( EMOJI_RUNNING_IPHONE ? 7.f : 7.f )
 #define EMOJI_NB_ITEM_IN_COL        ( EMOJI_RUNNING_IPHONE ? 4.f : 4.f )
+#define EMOJI_GRID_TOP_MARGIN       ( EMOJI_RUNNING_IPHONE ? 4.f : 4.f )
 #define EMOJI_GRID_MARGIN           ( EMOJI_RUNNING_IPHONE ? 1.f : 2.f )
 #define EMOJI_GRID_DEFAULT_WIDTH    ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_ROW + EMOJI_GRID_MARGIN * 2.f )
 #define EMOJI_GRID_DEFAULT_HEIGHT   ( EMOJI_ITEM_SIZE * EMOJI_NB_ITEM_IN_COL + EMOJI_GRID_MARGIN * 2.f )
-#define EMOJI_PAGECONTROL_HEIGHT    10.f
+#define EMOJI_PAGECONTROL_HEIGHT    (10.f)
+#define EMOJI_NAVBAR_HEIGHT         (50.f)
 
 @interface SYEmojiPopoverCell : UITableViewCell {
     NSUInteger _row;
@@ -36,7 +38,7 @@
 
 
 @interface SYEmojiPopover (Private)
--(void)loadView;
+-(void)createView;
 -(void)loadPage:(int)pageIndex;
 -(void)updateFramesForSize:(CGSize)size;
 -(void)setScrollEnabledAllTableViews:(BOOL)enabled;
@@ -45,33 +47,34 @@
 @implementation SYEmojiPopover
 
 @synthesize delegate = _delegate;
+@synthesize popover = _popover;
 
 #pragma mark - Initialization
 - (id)init
-{ if (self = [super init]) { [self loadView]; } return self; }
+{ if (self = [super init]) { [self createView]; } return self; }
 
-- (id)initWithFrame:(CGRect)frame
-{ if (self = [super initWithFrame:frame]) { [self loadView]; } return self; }
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{ if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) { [self createView]; } return self; }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
-{ if (self = [super initWithCoder:aDecoder]) { [self loadView]; } return self; }
+{ if (self = [super initWithCoder:aDecoder]) { [self createView]; } return self; }
 
 
 #pragma mark - Private methods
--(void)loadView {
+-(void)createView {
     
-    uint numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
+    NSUInteger numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
+    _preferredSize = CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT + EMOJI_PAGECONTROL_HEIGHT + EMOJI_PAGECONTROL_HEIGHT);
     
     /*************************************/
     /**********  MainView INIT  **********/
     /*************************************/
-    if(!self->_mainView)
-        self->_mainView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 1.f, 1.f)];
+    if(!self.view)
+        self.view = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, 1.f, 1.f)];
     
-    self->_mainView.autoresizingMask = UIViewAutoresizingNone;
-    self->_mainView.backgroundColor = [UIColor clearColor];
-    self->_mainView.clipsToBounds = YES;
-    
+    self.view.autoresizingMask = UIViewAutoresizingNone;
+    self.view.backgroundColor = [UIColor clearColor];
+    self.view.clipsToBounds = YES;
     
     /*************************************/
     /********  PageControl INIT  *********/
@@ -82,7 +85,7 @@
     self->_pageControl.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self->_pageControl.backgroundColor = [UIColor clearColor];
     self->_pageControl.clipsToBounds = YES;
-    self->_pageControl.numberOfPages = numberOfSections;
+    self->_pageControl.numberOfPages = (NSInteger)numberOfSections;
     self->_pageControl.currentPage = 0;
     
     if([self->_pageControl respondsToSelector:@selector(setPageIndicatorTintColor:)])
@@ -90,7 +93,7 @@
     if([self->_pageControl respondsToSelector:@selector(setCurrentPageIndicatorTintColor:)])
         self->_pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     
-    [self->_mainView addSubview:self->_pageControl];
+    [self.view addSubview:self->_pageControl];
     
     /*************************************/
     /*********  ScrollView INIT  *********/
@@ -111,7 +114,7 @@
     self->_scrollView.contentSize = CGSizeMake(1.f, 1.f);
     self->_scrollView.delegate = self;
     
-    [self->_mainView addSubview:self->_scrollView];
+    [self.view addSubview:self->_scrollView];
     
     /*************************************/
     /**********  TableView INIT  *********/
@@ -140,27 +143,46 @@
             [self->_tableViews addObject:tableView];
         }
     }
+
+    /*************************************/
+    /********  NavController INIT  *******/
+    /*************************************/
+    if(!self->_navController)
+        self->_navController = [[UINavigationController alloc] initWithRootViewController:self];
+    
+    NSDictionary *attr = @{UITextAttributeTextColor: [UIColor colorWithRed:0.329f green:0.341f blue:0.353f alpha:1.f],
+                           UITextAttributeFont: [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.f]};
+    
+    [self->_navController.navigationBar setTitleTextAttributes:attr];
+}
+
+-(CGSize)contentSizeForViewInPopover {
+    return self->_preferredSize;
 }
 
 -(void)updateFramesForSize:(CGSize)size
 {
-    uint numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
-    CGFloat pageHeight = size.height - EMOJI_PAGECONTROL_HEIGHT - 2.f;
+    self->_preferredSize = size;
     
-    if(self->_mainView)
-        [self->_mainView setFrame:CGRectMake(0.f, 0.f, size.width, size.height)];
+    NSUInteger numberOfSections = [[SYEmojiCharacters sharedCharacters] numberOfSections];
+    CGFloat pageHeight = size.height - EMOJI_PAGECONTROL_HEIGHT - 2.f - EMOJI_NAVBAR_HEIGHT;
+    
+    if(self.view)
+        [self.view setFrame:CGRectMake(0.f, 0.f, size.width, size.height)];
     
     if(self->_pageControl)
-        [self->_pageControl setFrame:CGRectMake(0.f, 0.f, size.width, EMOJI_PAGECONTROL_HEIGHT)];
+        [self->_pageControl setFrame:CGRectMake(0.f, EMOJI_GRID_TOP_MARGIN, size.width, EMOJI_PAGECONTROL_HEIGHT)];
     
     if(self->_scrollView) {
-        [self->_scrollView setFrame:CGRectMake(0.f, EMOJI_PAGECONTROL_HEIGHT + 2.f, size.width, pageHeight)];
+        [self->_scrollView setFrame:CGRectMake(0.f, EMOJI_GRID_TOP_MARGIN + EMOJI_PAGECONTROL_HEIGHT + 2.f, size.width, pageHeight)];
         [self->_scrollView setContentSize:CGSizeMake(size.width * numberOfSections, pageHeight)];
     }
     
     if(self->_tableViews) {
-        for(uint i = 0; i < [self->_tableViews count]; ++i)
-            [(UITableView*)[self->_tableViews objectAtIndex:i] setFrame:CGRectMake(i * size.width, 0.f, size.width, pageHeight)];
+        for(uint i = 0; i < [self->_tableViews count]; ++i) {
+            CGRect f = CGRectMake(i * size.width, 0.f, size.width, pageHeight);
+            [(UITableView*)[self->_tableViews objectAtIndex:i] setFrame:f];
+        }
     }
 }
 
@@ -186,29 +208,22 @@
 
 -(void)showFromPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title
 {
-    if(!self->_mainView)
-        [self loadView];
+    if(!self.view)
+        [self createView];
     
-    [self updateFramesForSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH, EMOJI_GRID_DEFAULT_HEIGHT + EMOJI_PAGECONTROL_HEIGHT)];
+    [self.navigationController.navigationBar.topItem setTitle:title];
+    [self updateFramesForSize:CGSizeMake(EMOJI_GRID_DEFAULT_WIDTH,
+                                         EMOJI_GRID_DEFAULT_HEIGHT +
+                                         EMOJI_PAGECONTROL_HEIGHT  +
+                                         EMOJI_NAVBAR_HEIGHT)];
     [self loadPage:0];
     [self loadPage:1];
     
-    [self->_popover setAutoresizingMask:UIViewAutoresizingNone];
-    self->_popover = [PopoverView showPopoverAtPoint:point
-                                              inView:view
-                                           withTitle:title
-                                     withContentView:self->_mainView
-                                            delegate:nil];
-}
-
--(void)moveToPoint:(CGPoint)point inView:(UIView*)view withDuration:(NSTimeInterval)duration
-{
-    if(!self->_popover)
-        return;
-    
-    [self->_popover animateRotationToNewPoint:point
-                                       inView:view
-                                 withDuration:duration];
+    self->_popover = [[WYPopoverController alloc] initWithContentViewController:self->_navController];
+    [self->_popover presentPopoverFromRect:CGRectMake(point.x, point.y, 1, 1)
+                                    inView:view
+                  permittedArrowDirections:WYPopoverArrowDirectionAny
+                                  animated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate methods
@@ -282,7 +297,7 @@
             if([self.delegate respondsToSelector:clickSel])
                 [self.delegate emojiPopover:self didClickedOnCharacter:character];
             
-            [self->_popover dismiss];
+            [self->_popover dismissPopoverAnimated:YES];
         }];
     }
     
