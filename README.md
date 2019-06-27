@@ -1,3 +1,15 @@
+Deprecated
+==========
+
+The number of Emoji characters to support has grown exponentially and maintaining them is no longer possible for me and it has been for quite a while. The code is antiqued and assumes iOS 5+.
+
+You could recreate this using a list of emoji characters, displayed in UICollectionView, in a popover (since those exist on iPhone now).
+
+Read the code, share it, update it, fork it, it's all yours now. 
+
+Please don't open an issue.
+
+
 SYEmojiPopover
 ==============
 
